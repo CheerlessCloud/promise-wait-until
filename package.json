@@ -1,0 +1,174 @@
+{
+  "name": "promise-wait-until",
+  "version": "0.0.0-development",
+  "description": "Mini util function, who wait until condition function return 'true' and resolve promise.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CheerlessCloud/promise-wait-until.git"
+  },
+  "keywords": [
+    "promise",
+    "util",
+    "wait-until",
+    "wait-until-promise"
+  ],
+  "author": "CheerlessCloud <nnsceg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CheerlessCloud/promise-wait-until/issues"
+  },
+  "homepage": "https://github.com/CheerlessCloud/promise-wait-until#README.md",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "prebuild": "rimraf ./dist",
+    "build": "babel . -d ./dist/ -s --ignore node_modules,test.js,spec.js,coverage,dist,.nyc_output",
+    "test": "cross-env NODE_ENV=test ava",
+    "test:dev": "cross-env NODE_ENV=test ava --watch",
+    "test:debug": "cross-env NODE_ENV=test node --inspect --inspect-brk --require babel-register node_modules/ava/profile.js ",
+    "cover": "cross-env NODE_ENV=test nyc ava",
+    "postcover": "nyc report --reporter=lcov",
+    "report-coverage": "catw coverage/lcov.info | coveralls",
+    "lint": "eslint --ext json --ext js .",
+    "lint:fix": "eslint --ext json --ext js --fix .",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "precommit": "lint-staged && npm run cover"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@bubltechnology/customizable-commit-analyzer": "^1.0.2-0",
+    "ava": "^0.22.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "catw": "^1.0.1",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.0.5",
+    "eslint": "^4.7.1",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsdoc": "^3.1.2",
+    "eslint-plugin-json": "^1.2.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.1",
+    "nyc": "^11.2.1",
+    "rimraf": "^2.6.2",
+    "semantic-release": "^8.0.3"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "eslint-config-airbnb-base",
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module",
+      "allowImportExportEverywhere": false,
+      "codeFrame": false
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "strict": "error",
+      "no-restricted-syntax": "off",
+      "babel/new-cap": 1,
+      "babel/no-invalid-this": 1,
+      "babel/semi": 1,
+      "consistent-return": "off",
+      "jsdoc/check-param-names": 1,
+      "jsdoc/check-tag-names": 1,
+      "jsdoc/check-types": 1,
+      "jsdoc/newline-after-description": 1,
+      "jsdoc/require-description-complete-sentence": 1,
+      "jsdoc/require-example": 0,
+      "jsdoc/require-hyphen-before-param-description": 1,
+      "jsdoc/require-param": 1,
+      "jsdoc/require-param-description": 1,
+      "jsdoc/require-param-type": "error",
+      "jsdoc/require-returns-description": 1,
+      "jsdoc/require-returns-type": 1
+    },
+    "plugins": [
+      "json",
+      "jsdoc",
+      "babel"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "6"
+          },
+          "useBuiltIns": "usage",
+          "exclude": [
+            "transform-regenerator",
+            "transform-async-to-generator"
+          ]
+        }
+      ]
+    ]
+  },
+  "ava": {
+    "files": [
+      "**/*.test.js",
+      "**/*.spec.js",
+      "test/**/*.js"
+    ],
+    "source": [
+      "src/*",
+      "bin/*"
+    ],
+    "verbose": true,
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "exclude": [
+      "config",
+      "src/libs"
+    ],
+    "cache": true
+  },
+  "release": {
+    "analyzeCommits": "@bubltechnology/customizable-commit-analyzer"
+  },
+  "config": {
+    "commitTypeMap": {
+      "feat": "minor",
+      "fix": "patch",
+      "docs": "null",
+      "style": "null",
+      "refactor": "null",
+      "perf": "patch",
+      "test": "null",
+      "build": "patch",
+      "ci": "null",
+      "chore": "null"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix ",
+      "git add"
+    ],
+    ".json": [
+      "eslint --ext json --fix ",
+      "git add "
+    ]
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ]
+}
