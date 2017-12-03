@@ -5,8 +5,6 @@
 
 [![NPM](https://nodei.co/npm/@cheerlesscloud/promise-wait-until.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@cheerlesscloud/promise-wait-until/)
 
-[![Sponsor](https://app.codesponsor.io/embed/jkPpzosXxwDBBaBNpoqWKCXd/CheerlessCloud/promise-wait-until.svg)](https://app.codesponsor.io/link/jkPpzosXxwDBBaBNpoqWKCXd/CheerlessCloud/promise-wait-until)
-
 ```javascript
 import waitUntil from 'promise-wait-until';
 
